@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.example.flutter_payfort_sdk">
+    <application
+        android:theme="@style/Theme.Payfort_sdk_plugin"
+        android:supportsRtl="true"
+        >
+        <activity android:name=".PaymentActivity"></activity>
+    </application>
+</manifest>

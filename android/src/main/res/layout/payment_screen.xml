@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".PaymentActivity"
+    android:theme="@style/Theme.Payfort_sdk_plugin"
+    >
+
+    <com.payfort.fortpaymentsdk.views.CardCvvView
+        android:id="@+id/etCardCvv"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        app:boxBackgroundShape="outline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.34"
+        app:layout_wrapBehaviorInParent="included"
+
+        >
+
+    </com.payfort.fortpaymentsdk.views.CardCvvView>
+
+    <com.payfort.fortpaymentsdk.views.CardHolderNameView
+        android:id="@+id/cardHolderNameView"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:paddingBottom="0dp"
+        app:boxBackgroundShape="outline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.403"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.47" />
+
+
+    <com.payfort.fortpaymentsdk.views.PayfortPayButton
+        android:id="@+id/btntPay"
+        android:layout_width="275dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rounded_button"
+        android:gravity="center"
+        android:paddingBottom="0dp"
+        android:text="@string/pay"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <com.payfort.fortpaymentsdk.views.CardExpiryView
+        android:id="@+id/etCardExpiry"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        app:boxBackgroundShape="outline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+
+        />
+
+    <com.payfort.fortpaymentsdk.views.FortCardNumberView
+
+        android:id="@+id/etCardNumberView"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        app:boxBackgroundShape="outline"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.058"
+        app:textSize="16sp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
