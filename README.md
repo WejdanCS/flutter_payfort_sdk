@@ -12,6 +12,28 @@ To use this plugin, add `flutter_payfort_sdk` as a dependency in your pubspec.ya
 
 ### ScreenShots
 
+<p>
+  <img src="https://github.com/WejdanCS/flutter_payfort_sdk/blob/main/screenShots/ScreenShot1.png?raw=true" height="400"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/WejdanCS/flutter_payfort_sdk/blob/main/screenShots/ScreenShot2.png?raw=true" height="400"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/WejdanCS/flutter_payfort_sdk/blob/main/screenShots/ScreenShot3.png?raw=true" height="400"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <br>
+  </p>
+  
+  ### add custom colors:
+  
+  <br>
+  <p>
+  <img src="https://github.com/WejdanCS/flutter_payfort_sdk/blob/main/screenShots/ScreenShot4.png?raw=true" height="400"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/WejdanCS/flutter_payfort_sdk/blob/main/screenShots/ScreenShot5.png?raw=true" height="400"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/WejdanCS/flutter_payfort_sdk/blob/main/screenShots/ScreenShot6.png?raw=true" height="400"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+
 
 
 ## Example
