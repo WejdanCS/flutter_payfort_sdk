@@ -1,6 +1,6 @@
 name: flutter_payfort_sdk
 description: This plugin for Payfort SDK where you can pay with it.
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/WejdanCS/flutter_payfort_sdk
 
 environment:
