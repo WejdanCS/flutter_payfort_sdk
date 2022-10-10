@@ -48,6 +48,14 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         isLoading = true;
       });
+      // you can add custom colors - (OPTIONAL)
+      await FlutterPayfortSdk.customizePaymentActivityColors(
+          actionBarBackgroundColor:Colors.deepPurple,
+          actionBartTitleColor: Colors.white,
+          statusBarColor: Colors.deepPurpleAccent.shade100,
+        payButtonBackgroundColor: Colors.deepPurpleAccent,
+        payButtonTextColor: Colors.white
+      );
       //1. get deviceId
       String? deviceId = await FlutterPayfortSdk.getDeviceId();
       //2. create SDK token

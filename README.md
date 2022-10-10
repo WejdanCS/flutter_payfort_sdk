@@ -1,6 +1,6 @@
 # flutter_payfort_sdk
 
-A new Flutter project.
+ Please before use this package read [PAYFORT](https://paymentservices-reference.payfort.com/docs/api/build/index.html#before-starting-your-integration-follow-these-steps) documentation .
 
 ## Platform Support
 This plugin currently works only on android.
@@ -11,23 +11,48 @@ To use this plugin, add `flutter_payfort_sdk` as a dependency in your pubspec.ya
 
 
 ### ScreenShots
+
 <br>
 <dive>
-<img src="screenShots/ScreenShot1.png" width="200" style="display: block;
+<img src="https://drive.google.com/uc?export=view&id=1xyo45CHuP_oRRhxUCl40hK9bws05kE-M" width="200" style="display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;">
 <br>
-<img src="screenShots/ScreenShot2.png" width="200" style="display: block;
+
+<img src="https://drive.google.com/uc?export=view&id=1Wp5DGpD3gM_u0ONHaY-Sw1nRxS8-jmih" width="200" style="display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;">
 <br>
-<img src="screenShots/ScreenShot3.png" width="200" style="display: block;
+
+<img src="https://drive.google.com/uc?export=view&id=1pIzVsoqU5bLfwedcvevKqks3OT_plwqr" width="200" style="display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;">
 </dive>
+
+### add custom colors:
+<img src="https://drive.google.com/uc?export=view&id=1EdwYvcqUzWHTElaPLIeYCBxpAC-xxqOs" width="200" style="display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;">
+</dive>
+
+<img src="https://drive.google.com/uc?export=view&id=1CfGFjhoyIbmKm1LL6zvK57sCkaVBXp0e" width="200" style="display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;">
+</dive>
+
+
+<img src="https://drive.google.com/uc?export=view&id=1hqLASGgdrm40m7YIrokWQXXVBIS8fLGg" width="200" style="display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;">
+</dive>
+
+
 ## Example
 
 Import the library.
@@ -36,14 +61,14 @@ Import the library.
 import 'package:flutter_payfort_sdk/flutter_payfort_sdk.dart';
 ```
 
-###1. getDeviceId
+### 1. getDeviceId
 
 ```dart
     String? deviceId = await FlutterPayfortSdk.getDeviceId();
 
 ```
 
-###2. create SDK token
+### 2. create SDK token
 #####You can use our classes CreateTokenRequest and CreateTokenResponse to send data to server and return data from it
 ###(or you can use your own request and response but it is important to return `sdkToken` and `merchantReference` to use it in payfortsdk)
 
@@ -63,7 +88,8 @@ import 'package:flutter_payfort_sdk/flutter_payfort_sdk.dart';
 
 
 ```
-###3. goToPaymentActivity
+
+### 3. goToPaymentActivity
 
 ```dart
   if (tokenRes.success != null && tokenRes.success == true) {
@@ -95,6 +121,22 @@ import 'package:flutter_payfort_sdk/flutter_payfort_sdk.dart';
         Fluttertoast.showToast(msg: "payment process is failed");
       }
 ```
+
+
+### 4. customizePaymentActivityColors
+
+```dart
+   // you can add custom colors - (OPTIONAL)
+  // When you do not use this function the default colors will use
+      await FlutterPayfortSdk.customizePaymentActivityColors(
+          actionBarBackgroundColor:Colors.deepPurple,
+          actionBartTitleColor: Colors.white,
+          statusBarColor: Colors.deepPurpleAccent.shade100,
+        payButtonBackgroundColor: Colors.deepPurpleAccent,
+        payButtonTextColor: Colors.white
+      );
+```
+
 
 ### enum classes
 ```dart

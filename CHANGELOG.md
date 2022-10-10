@@ -1,3 +1,5 @@
+## 0.1.1
+* Add `customizePaymentActivityColors` to add customize payment page colors
+* Fix screenshots url
 ## 0.0.1
-
-* TODO: Describe initial release.
+* First Release

@@ -6,13 +6,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import com.payfort.fortpaymentsdk.FortSdk;
@@ -37,13 +43,14 @@ public class PaymentActivity extends AppCompatActivity {
     MySpinnerDialog myInstance;
     FragmentManager fm;
 
-    @SuppressLint("WrongConstant")
+    @SuppressLint({"WrongConstant", "ResourceType"})
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= ActivityCcPaymentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Activity activity=this;
+
 
         Bundle b = getIntent().getExtras();
         String languageCode = b.getString("language_code");
@@ -56,10 +63,31 @@ public class PaymentActivity extends AppCompatActivity {
         String currency=b.getString("currency");
         String amount=b.getString("amount");
         String loadingMessage=b.getString("loading_message");
+        boolean setCustomColors=b.getBoolean("set_custom_colors",false);
 
         setLocale(activity,languageCode);
         setTitle(R.string.app_name);
         setContentView(R.layout.payment_screen);
+        PayfortPayButton payButton = findViewById(R.id.btntPay);
+        payButton.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        payButton.setTextSize(16);
+
+        if(setCustomColors) {
+            int actionBarBackgroundColor = b.getInt("action_bar_background_color");
+            int actionBartTitleColor = b.getInt("action_bar_title_color");
+            int statusBarColor = b.getInt("status_bar_color");
+            int payButtonBackgroundColor=b.getInt("pay_button_background_color");
+            int payButtonTextColor=b.getInt("pay_button_text_color");
+
+      getSupportActionBar().setBackgroundDrawable(new ColorDrawable(actionBarBackgroundColor));
+        getWindow().setStatusBarColor(statusBarColor);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color="+actionBartTitleColor+">"+getTitle() +"</font>"));
+        GradientDrawable shape = (GradientDrawable) payButton.getBackground();
+        shape.setColor(payButtonBackgroundColor);
+        payButton.setTextColor(payButtonTextColor);
+
+        }
+
         if (android.os.Build.VERSION.SDK_INT > 9)
         {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -67,14 +95,12 @@ public class PaymentActivity extends AppCompatActivity {
         }
 
 
-        PayfortPayButton payButton = findViewById(R.id.btntPay);
-        payButton.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        payButton.setTextSize(16);
+
         FortCardNumberView etCardNumberView= findViewById(R.id.etCardNumberView);
         CardCvvView etCardCvv=findViewById(R.id.etCardCvv);
         CardExpiryView etCardExpiry=findViewById(R.id.etCardExpiry);
         CardHolderNameView cardHolderNameView=findViewById(R.id.cardHolderNameView);
-//        create PayComponents object
+        // create PayComponents object
         PayComponents payComponents= new PayComponents(etCardNumberView,etCardCvv,etCardExpiry,cardHolderNameView);
 
         FortRequest fortrequest = new FortRequest();

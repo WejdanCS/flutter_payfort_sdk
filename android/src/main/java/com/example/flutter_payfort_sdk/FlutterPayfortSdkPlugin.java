@@ -2,9 +2,13 @@ package com.example.flutter_payfort_sdk;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.payfort.fortpaymentsdk.FortSdk;
 
@@ -12,6 +16,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
@@ -28,16 +34,20 @@ import static android.app.Activity.RESULT_OK;
 /** FlutterPayfortSdkPlugin */
 public class FlutterPayfortSdkPlugin implements FlutterPlugin, MethodCallHandler , ActivityAware, PluginRegistry.ActivityResultListener {
   private MethodChannel channel;
-//  private Context context;
   private int REQUEST_CODE=0;
   private Result nativeResult;
   private FlutterActivity activity;
+  String actionBarBackgroundColor;
+  String actionBartTitleColor;
+  String statusBarColor;
+  String payButtonBackgroundColor;
+  String payButtonTextColor;
+  boolean setCustomColors=false;
+
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
     channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "com.example.flutter_payfort_sdk/channels");
-//    context=flutterPluginBinding.getApplicationContext();
-    System.out.println("from onAttachedToEngine");
     channel.setMethodCallHandler(this);
   }
 
@@ -55,8 +65,7 @@ public class FlutterPayfortSdkPlugin implements FlutterPlugin, MethodCallHandler
       String amount=call.argument("amount");
       String loadingMessage=call.argument("loading_message");
 
-//                goToSecondActivity(languageCode);
-      Intent i = new Intent(activity.getContext(), PaymentActivity.class);
+      Intent i = new Intent(activity.getApplicationContext(), PaymentActivity.class);
       i.putExtra("language_code", languageCode);
       i.putExtra("environment", environment);
       i.putExtra("merchant_reference", merchantReference);
@@ -66,14 +75,33 @@ public class FlutterPayfortSdkPlugin implements FlutterPlugin, MethodCallHandler
       i.putExtra("currency", currency);
       i.putExtra("amount", amount);
       i.putExtra("loading_message",loadingMessage);
+      i.putExtra("set_custom_colors",setCustomColors);
+        if(setCustomColors==true) {
+          i.putExtra("action_bar_background_color", Color.parseColor(actionBarBackgroundColor));
+          i.putExtra("action_bar_title_color", Color.parseColor(actionBartTitleColor));
+          i.putExtra("status_bar_color", Color.parseColor(statusBarColor));
+          i.putExtra("pay_button_background_color", Color.parseColor(payButtonBackgroundColor));
+          i.putExtra("pay_button_text_color", Color.parseColor(payButtonTextColor));
+        }
+
 
       activity.startActivityForResult(i, REQUEST_CODE);
 
     }else if(call.method.equals("getDeviceId")){
-      String _deviceId= FortSdk.getDeviceId(activity.getContext());
+      String _deviceId= FortSdk.getDeviceId(activity.getApplicationContext());
       result.success(_deviceId);
 
-    }else{
+    }else if(call.method.equals("customizePaymentActivityColors")){
+      setCustomColors=true;
+      actionBarBackgroundColor=call.argument("action_bar_background_color");
+      actionBartTitleColor=call.argument("action_bar_title_color");
+      statusBarColor=call.argument("status_bar_color");
+      payButtonBackgroundColor=call.argument("pay_button_background_color");
+      payButtonTextColor=call.argument("pay_button_text_color");
+      result.success(true);
+
+    }
+    else{
       result.notImplemented();
     }
   }
@@ -86,7 +114,7 @@ public class FlutterPayfortSdkPlugin implements FlutterPlugin, MethodCallHandler
   @Override
   public void onAttachedToActivity(@NonNull @NotNull ActivityPluginBinding binding) {
     System.out.println("onAttachedToActivity:");
-    activity = (FlutterActivity)binding.getActivity();
+    activity = (FlutterActivity) binding.getActivity();
     binding.addActivityResultListener(this);
   }
 
@@ -110,12 +138,6 @@ public class FlutterPayfortSdkPlugin implements FlutterPlugin, MethodCallHandler
     Map result1 = new HashMap<>();
     if (requestCode == REQUEST_CODE) {
       if (resultCode == RESULT_OK) {
-        // A contact was picked.  Here we will just display it
-        // to the user.
-        // resultData=data;
-        System.out.println("data:");
-//                System.out.println();
-
         if (data != null) {
           result1.put("success", data.getBooleanExtra("success", false));
           result1.put("response_message", data.getStringExtra("response_message"));
@@ -146,4 +168,5 @@ public class FlutterPayfortSdkPlugin implements FlutterPlugin, MethodCallHandler
     return  false;
 
   }
+
 }
