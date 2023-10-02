@@ -1,3 +1,6 @@
+# DISCLAIMER: this plugin isn't maintained anymore.
+If you are a developer, you have the option to fork this repository and update it.
+
 # flutter_payfort_sdk
 
  Please before use this package read [PAYFORT](https://paymentservices-reference.payfort.com/docs/api/build/index.html#before-starting-your-integration-follow-these-steps) documentation .
